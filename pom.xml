@@ -19,7 +19,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
-		<sonar.host.url>http://15.207.14.119:9000/</sonar.host.url>
+		<sonar.host.url>http://52.66.248.50:9000/</sonar.host.url>
 		<sonar.login>admin</sonar.login>
 		<sonar.password>admin</sonar.password>
 
@@ -94,13 +94,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Sree Release Nexus Repository</name>
-	      <url>http://13.235.74.131:8081/AumNexus/repository/wallmart-release/</url>
+	      <url>http://13.235.90.240:8081/AumNexus/repository/wallmart-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Sree Snapshot Nexus Repository </name>
-	      <url>http://13.235.74.131:8081/AumNexus/repository/wallmart-snapshot/</url>
+	      <url>http://13.235.90.240:8081/AumNexus/repository/wallmart-snapshot/</url>
 	    </snapshotRepository>
 	  
 	</distributionManagement>
