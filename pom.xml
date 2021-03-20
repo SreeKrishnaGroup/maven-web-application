@@ -91,6 +91,7 @@
 		
 	</dependencies>
 	
+	<!--  Nexus Repository credentials should be with the same id in maven also -->
 	<distributionManagement>
 	
 	    <repository>
