@@ -1,0 +1,66 @@
+pipeline{
+    agent any
+    environment {
+        M2_HOME = '/opt/maven3.6.3'
+    }// any
+    options{
+        timestamps()
+        
+    } //end Options
+    
+    stages {
+        
+        stage ('checkoutCode'){
+            steps {
+                git branch: 'development', credentialsId: '0852adfa-a5ad-4954-91c7-0ecfe198b6c5', url: 'https://github.com/SreeKrishnaGroup/maven-web-application.git'
+            }
+        }  //End checkout code
+        
+         stage ('Build'){
+            steps {
+                sh "$M2_HOME/bin/mvn clean package"
+            }
+        }  //End Build
+        
+         stage ('executeSonarQubeReport'){
+            steps {
+                sh "$M2_HOME/bin/mvn sonar:sonar"
+            }
+        }  //Execute SonarQube Code Anaysis
+        
+         stage ('uploadArtifactToNexust'){
+            steps {
+                sh "$M2_HOME/bin/mvn deploy"
+            }
+        }  //Upload Artifact to Nexus
+        
+        stage ('Deploy to Tomcat'){
+            steps {
+                sshagent(['bf352a21-1109-4473-be19-2bfd91b62dcc']) {
+                    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@13.127.148.187:/opt/tomcat9/webapps/"
+                    
+                 }
+            }
+        }  //Deploy to Tomcat
+        
+    }   // end stages
+    
+    post {
+        
+        always {  
+             echo 'This will always run'  
+         }  
+         success {  
+             echo 'This will run only if successful'  
+           //  mail   body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "foo@foomail.com";  
+
+         }  
+         
+         failure {  
+             mail   body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "foo@foomail.com";  
+         } 
+        
+        
+    }  //end post
+    
+}
