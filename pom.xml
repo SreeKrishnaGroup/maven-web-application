@@ -97,13 +97,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Sree Release Nexus Repository</name>
-	      <url>http://13.232.213.153:8081/AumNexus/repository/wallmart-release/</url>
+	      <url>http://15.207.18.183:8081/AumNexus/repository/wallmart-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Sree Snapshot Nexus Repository </name>
-	      <url>http://13.232.213.153:8081/AumNexus/repository/wallmart-snapshot/</url>
+	      <url>http://15.207.18.183:8081/AumNexus/repository/wallmart-snapshot/</url>
 	    </snapshotRepository>
 	  
 	</distributionManagement>
