@@ -1,0 +1,50 @@
+pipeline {
+    
+    agent any
+    options {
+        timestamps()
+    }
+    environment {
+        M2_HOME='/opt/maven3.6.3'
+    }
+    stages{
+        stage('checkoutCode'){
+            steps {
+            git branch: 'development', credentialsId: '0852adfa-a5ad-4954-91c7-0ecfe198b6c5', url: 'https://github.com/SreeKrishnaGroup/maven-web-application.git'
+            }
+                
+            }  // end  stage Checkout
+        
+        stage('Build'){
+            steps{
+                sh "$M2_HOME/bin/mvn clean package "
+            }
+        }  // Build
+        
+        stage('generateSonarQubeReport'){
+            steps{
+                sh "$M2_HOME/bin/mvn sonar:sonar "
+            }
+        }  //Execute Sonar Report
+        
+         stage('deployToNexus'){
+            steps{
+                sh "$M2_HOME/bin/mvn deploy "
+            }
+        }  //Deploy to nexus
+        
+        stage('deployToTomcat'){
+            steps{
+                
+                sshagent(['bf352a21-1109-4473-be19-2bfd91b62dcc']) {
+                  sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war  ec2-user@13.233.110.126:/opt/tomcat9/webapps/"
+                   
+                    
+                }
+            }
+        }  //Deploy to Tomcat
+        
+    } //end stages
+    
+    
+} //end pipeline
