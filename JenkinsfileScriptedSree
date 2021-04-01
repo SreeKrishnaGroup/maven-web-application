@@ -13,7 +13,7 @@ properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKe
         sh "$MAVEN_HOME/bin/mvn clean package"
     }
     
-    stage('ExecuteSonarQubeReport'){
+    /*stage('ExecuteSonarQubeReport'){
         
         sh "$MAVEN_HOME/bin/mvn sonar:sonar"
     }
@@ -34,5 +34,5 @@ properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKe
 
            Regards,
            Sree''', subject: 'Build Over', to: 'sreepaadam94@gmail.com'
-    }
+    }*/
 }
