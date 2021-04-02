@@ -1,6 +1,6 @@
 pipeline {
     
-    agent 'Slaves'
+    agent {label 'Slaves'}
     options {
         timestamps()
     }
