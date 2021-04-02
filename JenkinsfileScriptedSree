@@ -1,4 +1,4 @@
-node {
+node (label 'Slaves'){
    
       def  MAVEN_HOME ="/opt/maven3.6.3"
       
