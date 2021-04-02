@@ -21,7 +21,7 @@ pipeline {
             }
         }  // Build
         
-        stage('generateSonarQubeReport'){
+       /* stage('generateSonarQubeReport'){
             steps{
                 sh "$M2_HOME/bin/mvn sonar:sonar "
             }
@@ -43,6 +43,8 @@ pipeline {
                 }
             }
         }  //Deploy to Tomcat
+        
+        */
         
     } //end stages
     
